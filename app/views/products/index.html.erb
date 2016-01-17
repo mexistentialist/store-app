@@ -1,0 +1,14 @@
+<h1>These are all the products we have on file</h1>
+
+<% @products.each do |product| %>
+
+	<!-- Interpolation method of doing this <a href="/products/<%= product.id %>"><%=product.name%></a> -->
+ <h2><%= link_to product.name, "/products/#{product.id}" %></h2>
+<h4><%=product.price%></h4>
+	<h4><%=product.description%></h4>
+	<img src="<%=product.image%>">
+	<h5><a data-confirm="Are you sure?" data-method="delete" href="/products/<%= product.id%>" rel="nofollow">Delete</a></h5>
+	<h6><a href="/products/<%=product.id%>/edit">Edit this product</a></h6>
+
+<hr>
+<% end %>

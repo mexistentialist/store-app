@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
 
-  get '/all-products' => 'products#all_products'
+  get '/' => 'products#index'
+  get '/products' => 'products#index'
   get '/random' => 'products#random'
 
+  get '/products/new' => 'products#new'
+  post '/products' => 'products#create'
+
+  get '/products/:id' => 'products#show'
+
+  get '/products/:id/edit' => 'products#edit'
+  patch 'products/:id' => 'products#update'
+
+  delete 'products/:id' => 'products#destroy'
 end
