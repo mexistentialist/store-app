@@ -1,4 +1,4 @@
-<h1>Your specific product</h1>
+<h1>Your product:</h1>
 
 <ul>	
 	<li><%=@product.name%></li>
@@ -7,3 +7,6 @@
 </ul>
 	<img src="<%=@product.image%>">
 <hr>
+<%= link_to "Home", "/"%>
+<%= link_to "Edit", "/products/#{@product.id}/edit"%>
+<%= link_to "Destroy", "/products/#{@product.id}", method: :delete, data:{confirm: "Are you sure you want to delete this item?"} %>
