@@ -6,17 +6,30 @@ class ProductsController < ApplicationController
 		
 		@dropdown = Product.all
 
+		if params[:sort] && params[:sort_order]
+			@products = @products.order(params[:sort] => params[:sort_order])
+		end
+		if params[:discount]
+			@products = @products.where("price < ?", params[:discount])
+		end
 	end
 
 	def random
-		@products = Product.all.sample
-		@title = "Random product"
+		@product = Product.all.sample
 		@dropdown = Product.all
+
+		render :show
 	end
 
+	def search
+		@dropdown = Product.all
+
+		@products = Product.where("name LIKE ? OR description LIKE ? OR price LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+		render :index
+	end
 
 	def new
-				@dropdown = Product.all
+		@dropdown = Product.all
 	end
 
 	def create
@@ -34,6 +47,10 @@ class ProductsController < ApplicationController
 		@title = @product.name
 		@dropdown = Product.all
 	end
+
+
+
+
 
 	def edit
 		@product = Product.find(params[:id])

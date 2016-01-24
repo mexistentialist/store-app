@@ -1,9 +1,13 @@
-<h1>Refresh for new products</h1>
+<h1><%=@product.name%></h1>
 
-<ul>
-	<li><%=@products.name%></li>
-	<li><%=@products.price%></li>
-	<li><%=@products.description%></li>
-</ul>
-	<img src="<%=@products.image%>">
-	
+<h3><%= @product.sale_method %></h3>
+<h4><%=@product.description%></h4>
+<br/>
+<h5>Price: $<%=@product.price%></h5>
+<h5>Tax: <%= @product.tax %></h5>
+<h5>Total: <strong><%= @product.total %></strong></h5>
+<img src="<%=@product.image%>">
+<hr>
+ <%= link_to "Home", "/"%>
+ <%= link_to "Edit", "/products/#{@product.id}/edit"%>
+ <%= link_to "Destroy", "/products/#{@product.id}", method: :delete, data:{confirm: "Are you sure you want to delete this item?"} %> -->

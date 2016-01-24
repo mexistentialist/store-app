@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
 
 	def sale_method
-		if price.delete("$").to_f <= 2
+		if price <= 2
 			"Discount item!"
 		else 
 			"On sale!"
@@ -9,16 +9,16 @@ class Product < ActiveRecord::Base
 	end
 
 	def tax
-		price.delete!("$") 
-		tax = price.to_f * 0.09
+		price
+		tax = price * 0.09
 		"$ #{tax.round(2)}"
 
 	end
 
 	def total
 		# price.delete!("$") 
-		tax = price.to_f * 0.09
-		total = price.to_f + tax
+		tax = price * 0.09
+		total = price + tax
 		"$ #{total.round(2)}"
 	end
 

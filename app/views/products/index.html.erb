@@ -6,7 +6,7 @@
 	<div class="thumbnail">
 		<!-- Interpolation method of doing this <a href="/products/<%= product.id %>"><%=product.name%></a> -->
 		<h2><%= link_to product.name, "/products/#{product.id}" %></h2>
-		<h4><%=product.price%></h4>
+		<h4>$<%=product.price%></h4>
 		<h4><%=product.description%></h4>
 		<img src="<%=product.image%>">
 			<h4><%= link_to "Edit", "/products/#{product.id}/edit"%></h4>
