@@ -7,6 +7,8 @@
 <h5>Tax: <%= @product.tax %></h5>
 <h5>Total: <strong><%= @product.total %></strong></h5>
 <img src="<%=@product.image%>">
+<h5><%=  @product.supplier.name%></h5>
+ 
 <hr>
  <%= link_to "Home", "/"%>
  <%= link_to "Edit", "/products/#{@product.id}/edit"%>
