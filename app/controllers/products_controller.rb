@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 		@products = Product.all
 		@title = "All Products"
 		
-		@dropdown = Product.all
+		# @dropdown = Product.all
 
 		if params[:sort] && params[:sort_order]
 			@products = @products.order(params[:sort] => params[:sort_order])
@@ -16,36 +16,39 @@ class ProductsController < ApplicationController
 
 	def random
 		@product = Product.all.sample
-		@dropdown = Product.all
+		# @dropdown = Product.all
 
 		render :show
 	end
 
 	def search
-		@dropdown = Product.all
+		# @dropdown = Product.all
 
 		@products = Product.where("name LIKE ? OR description LIKE ? OR price LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
 		render :index
 	end
 
 	def new
-		@dropdown = Product.all
+		# @dropdown = Product.all
 	end
 
 	def create
 		@product = Product.create({name: params[:name],
 					 			price: params[:price], 
 					 			description: params[:description], 
-					 			image: params[:image]})
+					 			supplier_id: params[:supplier][:supplier_id]})
 		flash[:success] = "Product added."
 		redirect_to "/"
-		@dropdown = Product.all
+
+		Image.create({url: params[:image], product_id: @product.id}) if params[:image] != ""
+
+		# @dropdown = Product.all
 	end
 
 	def show
 		@product = Product.find(params[:id])
 		@title = @product.name
-		@dropdown = Product.all
+		# @dropdown = Product.all
 	end
 
 
@@ -54,18 +57,18 @@ class ProductsController < ApplicationController
 
 	def edit
 		@product = Product.find(params[:id])
-		@dropdown = Product.all
+		# @dropdown = Product.all
 	end
 
 	def update
 		@product = Product.find(params[:id])
 		@product.update({name: params[:name], 
 								price: params[:price], 
-								description: params[:description], 
-								image: params[:image]})
+								description: params[:description] 
+								})
 		flash[:success] = "Product updated."
 		redirect_to "/products/#{@product.id}"
-		@dropdown = Product.all
+		# @dropdown = Product.all
 	end
 
 	def destroy
@@ -74,7 +77,7 @@ class ProductsController < ApplicationController
 		@products = @product
 		flash[:danger] = "Okay, you're the boss. Item deleted."
 		redirect_to "/"
- 		@dropdown = Product.all
+ 		# @dropdown = Product.all
  	end
 
 end

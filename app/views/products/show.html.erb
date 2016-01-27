@@ -6,7 +6,9 @@
 <h5>Price: $<%=@product.price%></h5>
 <h5>Tax: <%= @product.tax %></h5>
 <h5>Total: <strong><%= @product.total %></strong></h5>
-<img src="<%=@product.image%>">
+<% @product.images.each do |image| %>
+<%= image_tag image.url, class: "img-responsive" %>
+<% end %>
 <h5><%=  @product.supplier.name%></h5>
  
 <hr>

@@ -24,6 +24,10 @@ has_many :images
 		"$ #{total.round(2)}"
 	end
 
-
+	def get_the_first_image
+		if images.first
+			images.first.url
+		end
+	end
 
 end
