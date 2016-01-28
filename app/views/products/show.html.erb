@@ -6,10 +6,20 @@
 <h5>Price: $<%=@product.price%></h5>
 <h5>Tax: <%= @product.tax %></h5>
 <h5>Total: <strong><%= @product.total %></strong></h5>
-<% @product.images.each do |image| %>
-<%= image_tag image.url, class: "img-responsive" %>
-<% end %>
 <h5><%=  @product.supplier.name%></h5>
+
+<%= form_tag '/orders', method: :post do %>
+	<div>
+		<%= label_tag "Checkout" %>
+		<%= text_field_tag :quantity %>
+	</div>
+	<div>
+		<%= label_tag "Product ID" %>
+		<%= text_field_tag :product_id %>
+	</div>
+	<%= submit_tag "Buy Now!" %>
+<% end %>
+
  
 <hr>
  <%= link_to "Home", "/"%>

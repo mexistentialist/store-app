@@ -1,7 +1,9 @@
 class Product < ActiveRecord::Base
 
+belongs_to :user
 belongs_to :supplier
 has_many :images
+has_many :orders
 
 	def sale_method
 		if price <= 2
