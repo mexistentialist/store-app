@@ -1,7 +1,4 @@
+<h1> <%= @order.user.email.titleize %></h1>
 
-<h5>User ID: <%= @order.id %></h5>
-<h5>Product ID: <%= @order.product_id %></h5>
-<h5>Ordered Quantity: <%= @order.quantity %></h5>
-<h5>Price: <%= @order.product.price * @order.quantity %></h5>
-<h5>Tax: <%= @order.product.tax * @order.quantity %></h5>
-<h5>Total: <%= @order.product.total * @order.quantity %></h5>
+<h1>Your Order is <%= @order.id %></h1>
+<h2>Total: <%= @order.total %></h2>

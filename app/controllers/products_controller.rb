@@ -12,6 +12,11 @@ class ProductsController < ApplicationController
 		if params[:discount]
 			@products = @products.where("price < ?", params[:discount])
 		end
+
+		if params[:category]
+			@products = Category.find_by(name: params[:category]).products
+		end
+
 	end
 
 	def random
@@ -22,14 +27,11 @@ class ProductsController < ApplicationController
 	end
 
 	def search
-		# @dropdown = Product.all
-
 		@products = Product.where("name LIKE ? OR description LIKE ? OR price LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
 		render :index
 	end
 
 	def new
-		# @dropdown = Product.all
 	end
 
 	def create
@@ -42,13 +44,11 @@ class ProductsController < ApplicationController
 
 		Image.create({url: params[:image], product_id: @product.id}) if params[:image] != ""
 
-		# @dropdown = Product.all
 	end
 
 	def show
 		@product = Product.find(params[:id])
 		@title = @product.name
-		# @dropdown = Product.all
 	end
 
 
@@ -57,7 +57,6 @@ class ProductsController < ApplicationController
 
 	def edit
 		@product = Product.find(params[:id])
-		# @dropdown = Product.all
 	end
 
 	def update
@@ -68,7 +67,9 @@ class ProductsController < ApplicationController
 								})
 		flash[:success] = "Product updated."
 		redirect_to "/products/#{@product.id}"
-		# @dropdown = Product.all
+
+		Image.create({url: params[:image], product_id: @product.id}) if params[:image] != ""
+
 	end
 
 	def destroy
@@ -77,7 +78,6 @@ class ProductsController < ApplicationController
 		@products = @product
 		flash[:danger] = "Okay, you're the boss. Item deleted."
 		redirect_to "/"
- 		# @dropdown = Product.all
  	end
 
 end

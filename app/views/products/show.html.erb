@@ -7,17 +7,28 @@
 <h5>Tax: <%= @product.tax %></h5>
 <h5>Total: <strong><%= @product.total %></strong></h5>
 <h5><%=  @product.supplier.name%></h5>
+	
+<% @product.images.each do |image| %>
+	<img src="<%=image.url%>">
+<% end %>
 
-<%= form_tag '/orders', method: :post do %>
-	<div>
+<h5>Tags:</h5>
+<% @product.categories.each do |category| %>
+	<h5><%= link_to category.name.titleize, "/products?category=#{category.name}" %></h5>
+<% end %>
+
+
+<%= form_tag '/carts', method: :post do %>
+	<div class="form-group">
 		<%= label_tag "Checkout" %>
 		<%= text_field_tag :quantity %>
 	</div>
-	<div>
-		<%= label_tag "Product ID" %>
-		<%= text_field_tag :product_id %>
+	<div class="form-group">
+		<%= hidden_field_tag :product_id, @product.id %>
 	</div>
-	<%= submit_tag "Buy Now!" %>
+
+	
+	<%= submit_tag "Add to cart!" %>
 <% end %>
 
  

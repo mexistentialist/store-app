@@ -1,21 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'products#index'
+  get '/products/random' => 'products#random'
+  post '/search' => 'products#search'
+
   get '/products' => 'products#index'
-  get '/:id' => 'products#random'
 
   get '/products/new' => 'products#new'
   post '/products' => 'products#create'
-
-  get '/products/random' => 'products#random'
   get '/products/:id' => 'products#show'
-
   get '/products/:id/edit' => 'products#edit'
   patch 'products/:id' => 'products#update'
-
   delete 'products/:id' => 'products#destroy'
 
-  post '/search' => 'products#search'
 #------------------------------------------
   get '/suppliers/index' => 'suppliers#index'
 
@@ -29,11 +26,13 @@ Rails.application.routes.draw do
 
   delete 'suppliers/:id' => 'suppliers#destroy'
 #------------------------------------------
+  
   post '/orders' => 'orders#create'
   get '/orders/:id' => 'orders#show'
 
-
-
+#------------------------------------------
+  get '/carts' => 'carted_products#index'
+  post '/carts' => 'carted_products#create'
 
 
   # get '/images/index' => 'images#index'
