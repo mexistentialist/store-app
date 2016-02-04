@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   devise_for :users
   root to: 'products#index'
   get '/products/random' => 'products#random'
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
 #------------------------------------------
   get '/carts' => 'carted_products#index'
   post '/carts' => 'carted_products#create'
+  delete '/carts/:id' => 'carted_products#destroy'
 
 
   # get '/images/index' => 'images#index'

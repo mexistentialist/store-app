@@ -30,4 +30,11 @@ class CartedProductsController < ApplicationController
 		
 	end
 
+	def destroy
+		carted_product = CartedProduct.find(params[:id])
+		carted_product.update(status: "Removed")
+		redirect_to "/carts"
+		
+	end
+
 end
